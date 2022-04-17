@@ -121,6 +121,14 @@ void preguntar2(char* ref_rta, int* ref_puntaje){
     } 
 }
 
+float parteDecimal (float num) {
+   // cuando usamos literales numericos y los asignamos a una variable de tipo float
+   // es correcto que le pongamos f al final para indicarselo al compilador
+   int parte_entera = (int)num;
+   num = num - (float)parte_entera; // se vuele a castear para evitar la warning de conversion
+   return num;
+}
+
 void preguntar3(float* hora_llegada){
     printf(SALTOCORTO);
     printf(PREGUNTA3);
@@ -129,14 +137,16 @@ void preguntar3(float* hora_llegada){
 
     // horas en la parte entera y minutos en la decimal
     int horas = (int)*hora_llegada;
-    float minutos = *hora_llegada - horas;
+    //float minutos = *hora_llegada - horas;
+    float minutos = parteDecimal(*hora_llegada);
 
     // validacion 
     while (horas < limite_inf_horas || horas > limite_sup_horas || minutos < limite_inf_minutos || minutos > limite_sup_minutos) {
         printf("\nRespuesta inválida, intenta de nuevo: ");
         scanf(" %f", hora_llegada);
         horas = (int)*hora_llegada;
-        minutos = *hora_llegada - horas;
+        //minutos = *hora_llegada - horas;
+        minutos = parteDecimal(*hora_llegada);
     }
     
     // No hace falta asignar puntaje en esta pregunta. Utilizaremos el valor de respuesta, que es la hora de llegada, para tomar decisiones
@@ -220,13 +230,18 @@ int main(){
 
     // Informo el resultado final 
     if (personaje_definitivo == olaf) {
-        printf("\n--> Con un puntaje de %i puntos se definió el personaje - Olaf (O) -.", puntaje_total);
+        //printf("\n--> Con un puntaje de %i puntos se definió el personaje - Olaf (O) -.", puntaje_total);
+        printf("-Olaf-");
     } else if (personaje_definitivo == stich) {
-        printf("\n--> Con un puntaje de %i puntos se definió el personaje - Stich (S) -.", puntaje_total);
+        //printf("\n--> Con un puntaje de %i puntos se definió el personaje - Stich (S) -.", puntaje_total);
+        printf("-Stitch-");
     } else if (personaje_definitivo == jasmin) {
-        printf("\n--> Con un puntaje de %i puntos se definió el personaje - Jasmin (J) -.", puntaje_total);
+        //printf("\n--> Con un puntaje de %i puntos se definió el personaje - Jasmin (J) -.", puntaje_total);
+        printf("-Jasmín-");
     } else if (personaje_definitivo == rayo) {
-        printf("\n--> Con un puntaje de %i puntos se definió el personaje - Rayo (R) -.", puntaje_total);
+        //printf("\n--> Con un puntaje de %i puntos se definió el personaje - Rayo (R) -.", puntaje_total);
+        printf("-Rayo McQueen-");
+
     } else {
         printf("\n--> Ups! Algo salio mal.");
     }
